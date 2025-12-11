@@ -10,9 +10,22 @@
 		E765E6FB2EE9179000B5091E /* MiraPDF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiraPDF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E7DAF4962EEAD107001E7516 /* Exceptions for "MiraPDF" folder in "MiraPDF" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E765E6FA2EE9179000B5091E /* MiraPDF */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E765E6FD2EE9179000B5091E /* MiraPDF */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E7DAF4962EEAD107001E7516 /* Exceptions for "MiraPDF" folder in "MiraPDF" target */,
+			);
 			path = MiraPDF;
 			sourceTree = "<group>";
 		};
