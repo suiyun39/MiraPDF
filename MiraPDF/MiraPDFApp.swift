@@ -1,17 +1,7 @@
-//
-//  MiraPDFApp.swift
-//  MiraPDF
-//
-//  Created by 随云 on 2025/12/10.
-//
-
 import SwiftUI
 
 @main
 struct MiraPDFApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+  // 启动时不显示任何窗口
+  var body: some Scene {}
 }
