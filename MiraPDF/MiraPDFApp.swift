@@ -4,6 +4,11 @@ import SwiftUI
 struct MiraPDFApp: App {
   // 启动时不显示任何窗口
   var body: some Scene {
-    Settings {}
+    Settings {
+      EmptyView()
+    }
+    .commands {
+      AppCommands()
+    }
   }
 }

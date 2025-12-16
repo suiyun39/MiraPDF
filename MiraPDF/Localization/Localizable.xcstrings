@@ -1,26 +1,24 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "app.name" : {
-      "comment" : "应用名称（不应翻译）",
-      "extractionState" : "manual",
+    "menu.about" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MiraPDF"
+            "value" : "About MiraPDF"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MiraPDF"
+            "value" : "MiraPDF について"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MiraPDF"
+            "value" : "关于 MiraPDF"
           }
         }
       }
