@@ -10,6 +10,10 @@ struct MiraPDFApp: App {
   }
 
   var body: some Scene {
+    DocumentGroup(newDocument: PDFDocumentFile()) { configuration in
+      Text(configuration.fileURL?.absoluteString ?? "")
+    }
+
     Settings {
       EmptyView()
     }
