@@ -1,8 +1,14 @@
+import OSLog
 import SwiftUI
 
 @main
 struct MiraPDFApp: App {
-  // 启动时不显示任何窗口
+  private let logger = Logger()
+
+  init() {
+    logger.info("Ciallo～(∠·ω< )⌒★")
+  }
+
   var body: some Scene {
     Settings {
       EmptyView()
