@@ -8,7 +8,7 @@ struct PDFDocumentFile: FileDocument {
     [.pdf]
   }
 
-  private let logger = Logger()
+  private let logger = Logger(category: "Core")
 
   // 仅用于满足 DocumentGroup 类型签名，此处不应有任何逻辑
   init() {

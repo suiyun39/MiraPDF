@@ -3,7 +3,7 @@ import SwiftUI
 
 @main
 struct MiraPDFApp: App {
-  private let logger = Logger()
+  private let logger = Logger(category: "App")
 
   init() {
     logger.info("Ciallo～(∠·ω< )⌒★")
