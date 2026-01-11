@@ -2,7 +2,7 @@ import OSLog
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// pdf 文档抽象，用于处理 pdf 文件序列化与反序列化
+/// pdf 文件数据，用于处理 pdf 文件读取与写入
 struct PDFDocumentFile: FileDocument {
   static var readableContentTypes: [UTType] {
     [.pdf]
@@ -18,7 +18,7 @@ struct PDFDocumentFile: FileDocument {
     logger.info("打开文件「\(configuration.file.filename ?? "未命名")」")
 
     guard let data = configuration.file.regularFileContents else {
-      logger.error("读取文件内容失败")
+      logger.error("读取文件数据失败")
       throw CocoaError(.fileReadCorruptFile)
     }
 
