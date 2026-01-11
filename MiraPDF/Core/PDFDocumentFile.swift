@@ -10,6 +10,9 @@ struct PDFDocumentFile: FileDocument {
 
   private let logger = Logger(category: "Core")
 
+  /// pdf 文件数据
+  var data = Data()
+
   // 仅用于满足 DocumentGroup 类型签名，此处不应有任何逻辑
   init() {
   }
@@ -22,14 +25,19 @@ struct PDFDocumentFile: FileDocument {
       throw CocoaError(.fileReadCorruptFile)
     }
 
+    guard !data.isEmpty else {
+      logger.error("文件数据为空")
+      throw CocoaError(.fileReadCorruptFile)
+    }
+
     // 检查 pdf 文件头，[0x25, 0x50, 0x44, 0x46] -> "%PDF"
     guard data.starts(with: [0x25, 0x50, 0x44, 0x46]) else {
       logger.error("不是有效的 pdf 文件")
       throw CocoaError(.fileReadCorruptFile)
     }
 
-    // todo: 创建 PDFKit 实例
     logger.info("文件加载成功，文件大小 \(data.count) 字节")
+    self.data = data
   }
 
   func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
