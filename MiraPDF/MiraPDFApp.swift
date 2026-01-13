@@ -10,7 +10,7 @@ struct MiraPDFApp: App {
   }
 
   var body: some Scene {
-    DocumentGroup(newDocument: PDFDocumentFile()) { configuration in
+    DocumentGroup(newDocument: PDFDocumentAdapter()) { configuration in
       Text(configuration.fileURL?.absoluteString ?? "")
     }
 

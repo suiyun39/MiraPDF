@@ -2,8 +2,8 @@ import OSLog
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// pdf 文件数据，用于处理 pdf 文件读取与写入
-struct PDFDocumentFile: FileDocument {
+/// DocumentGroup 文档适配器，应仅用于处理 pdf 文件读取与写入
+struct PDFDocumentAdapter: FileDocument {
   static var readableContentTypes: [UTType] {
     [.pdf]
   }
@@ -17,6 +17,7 @@ struct PDFDocumentFile: FileDocument {
   init() {
   }
 
+  // todo: 是否应在此处读取数据与验证？
   init(configuration: ReadConfiguration) throws {
     logger.info("打开文件「\(configuration.file.filename ?? "未命名")」")
 
