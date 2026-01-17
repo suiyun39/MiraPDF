@@ -11,7 +11,7 @@ struct MiraPDFApp: App {
 
   var body: some Scene {
     DocumentGroup(newDocument: PDFDocumentAdapter()) { configuration in
-      Text(configuration.fileURL?.absoluteString ?? "")
+      MainWindowView()
     }
 
     Settings {
