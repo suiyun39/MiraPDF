@@ -9,5 +9,9 @@ struct AppCommands: Commands {
         NSApplication.shared.orderFrontStandardAboutPanel()
       }
     }
+
+    // 移除默认的新建菜单
+    CommandGroup(replacing: .newItem) {
+    }
   }
 }
