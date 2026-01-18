@@ -2,14 +2,34 @@ import SwiftUI
 
 struct MainWindowView: View {
   @State
-  private var columnVisibility = NavigationSplitViewVisibility.detailOnly
+  private var vm = MainWindowViewModel()
+
+  // 由侧边栏模式计算布局模式
+  // 用户通过拖动等方式也可以打开关闭侧边栏，因此需要反向同步以防止状态不一致
+  private var columnVisibility: Binding<NavigationSplitViewVisibility> {
+    Binding(
+      get: {
+        return vm.sidebarMode == .none ? .detailOnly : .all
+      },
+      set: { value in
+        if value == .detailOnly && vm.sidebarMode != .none {
+          vm.sidebarMode = .none
+          return
+        }
+        if value == .all && vm.sidebarMode == .none {
+          vm.sidebarMode = .outline
+          return
+        }
+      },
+    )
+  }
 
   @State
   private var isPresented = false
 
   var body: some View {
     NavigationSplitView(
-      columnVisibility: $columnVisibility,
+      columnVisibility: columnVisibility,
       sidebar: {
         // todo: 临时占位，侧栏宽度后续增加内容后再调整
         Text(verbatim: "sidebar")
@@ -18,6 +38,7 @@ struct MainWindowView: View {
       detail: {
         // todo: 临时占位，后续换为 pdf 阅读器
         ScrollView {
+          Text(vm.sidebarMode.displayName).animation(nil)
           Rectangle().fill(.gray).frame(height: 2000).padding()
         }
       },
@@ -38,7 +59,7 @@ struct MainWindowView: View {
   private var windowToolbar: some ToolbarContent {
     // todo: 临时占位，后续精细化
     ToolbarItem(placement: .primaryAction) {
-      Button("", systemImage: "sparkles") {
+      Button(String(), systemImage: "sparkles") {
         withAnimation {
           isPresented.toggle()
         }
