@@ -13,6 +13,7 @@ struct MiraPDFApp: App {
     DocumentGroup(newDocument: PDFDocumentAdapter()) { configuration in
       MainWindowView()
     }
+    .windowToolbarLabelStyle(fixed: .iconOnly)
 
     Settings {
       EmptyView()
