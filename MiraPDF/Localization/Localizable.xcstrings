@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+      "shouldTranslate" : false
+    },
     "about.button.feedback" : {
       "localizations" : {
         "en" : {
@@ -151,6 +154,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "缩略图"
+          }
+        }
+      }
+    },
+    "toolbar.help.toggle_sidebar_mode" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toggle Sidebar Mode"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サイドバー切替"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换边栏模式"
           }
         }
       }

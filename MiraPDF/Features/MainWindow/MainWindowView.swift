@@ -33,6 +33,13 @@ struct MainWindowView: View {
       sidebar: {
         // todo: 临时占位，侧栏宽度后续增加内容后再调整
         Text(verbatim: "sidebar")
+          .toolbar(removing: .sidebarToggle)
+          .toolbar {
+            SidebarToolbar(sidebarMode: $vm.sidebarMode)
+          }
+
+          // min 应始终不小于 200，否则会导致侧边栏折叠时切换按钮消失
+          // 必须在 toolbar 之后配置
           .navigationSplitViewColumnWidth(min: 200, ideal: 260, max: 320)
       },
       detail: {
