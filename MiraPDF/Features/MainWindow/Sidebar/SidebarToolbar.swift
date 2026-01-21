@@ -10,11 +10,16 @@ struct SidebarToolbar: ToolbarContent {
 
     // 侧边栏模式切换按钮
     ToolbarItem(placement: .primaryAction) {
-      // todo: 后续改为菜单以展示所有的模式
-      Button("", systemImage: "sidebar.left") {
-        withAnimation(.snappy) {
-          sidebarMode = sidebarMode == .none ? .outline : .none
+      Menu {
+        Picker("", selection: $sidebarMode) {
+          ForEach(SidebarMode.allCases, id: \.self) { mode in
+            Text(mode.displayName).tag(mode)
+          }
         }
+        .pickerStyle(.inline)
+        .labelsHidden()
+      } label: {
+        Image(systemName: "sidebar.left")
       }
       .help("toolbar.help.toggle_sidebar_mode")
     }
