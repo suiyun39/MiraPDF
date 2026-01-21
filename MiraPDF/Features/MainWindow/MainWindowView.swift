@@ -50,6 +50,7 @@ struct MainWindowView: View {
         }
       },
     )
+    .animation(.snappy, value: columnVisibility.wrappedValue)
 
     // 右侧辅助面板，初步设计为承载 AI 助手
     .inspector(isPresented: $isPresented) {
