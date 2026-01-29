@@ -158,6 +158,16 @@
         }
       }
     },
+    "toolbar.help.ai-assistant" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI 助手"
+          }
+        }
+      }
+    },
     "toolbar.help.toggle_sidebar_mode" : {
       "localizations" : {
         "en" : {
