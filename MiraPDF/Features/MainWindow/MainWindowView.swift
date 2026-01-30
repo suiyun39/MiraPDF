@@ -48,6 +48,9 @@ struct MainWindowView: View {
           Text(vm.sidebarMode.displayName).animation(nil)
           Rectangle().fill(.gray).frame(height: 2000).padding()
         }
+        .toolbar {
+          MainWindowToolbar(assistantPresented: $assistantPresented)
+        }
       },
     )
     .animation(.snappy, value: columnVisibility.wrappedValue)
@@ -56,9 +59,6 @@ struct MainWindowView: View {
     .inspector(isPresented: $assistantPresented) {
       Text(verbatim: "AI Assistant Panel")
         .inspectorColumnWidth(min: 340, ideal: 420, max: 560)
-    }
-    .toolbar {
-      MainWindowToolbar(assistantPresented: $assistantPresented)
     }
   }
 }
