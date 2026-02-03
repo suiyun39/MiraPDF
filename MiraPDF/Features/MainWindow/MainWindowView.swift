@@ -52,6 +52,13 @@ struct MainWindowView: View {
         .toolbar {
           MainWindowToolbar(assistantPresented: $assistantPresented)
         }
+
+        // 点击主窗口时使搜索框失去焦点，暂不确定这种做法是否存在副作用
+        .onTapGesture {
+          DispatchQueue.main.async {
+            NSApplication.shared.keyWindow?.makeFirstResponder(nil)
+          }
+        }
       },
     )
     .animation(.snappy, value: columnVisibility.wrappedValue)
