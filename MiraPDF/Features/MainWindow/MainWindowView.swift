@@ -48,6 +48,7 @@ struct MainWindowView: View {
           Text(vm.sidebarMode.displayName).animation(nil)
           Rectangle().fill(.gray).frame(height: 2000).padding()
         }
+        .searchable(text: $vm.searchKeyword)
         .toolbar {
           MainWindowToolbar(assistantPresented: $assistantPresented)
         }
