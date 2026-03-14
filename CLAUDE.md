@@ -4,42 +4,47 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-MiraPDF 是一个使用 SwiftUI 构建的 macOS PDF 阅读器应用。
+MiraPDF 是一个使用 SwiftUI 构建的 macOS PDF 阅读器，旨在为用户提供简洁、易用的 PDF 阅读体验。
+
+## 代码规范
+
+- 统一使用 2 个空格缩进，单行代码不宜超过 120 字符
+- 代码注释使用中文，应保持精简、清晰、有效
+- 严格遵循 SwiftUI 官方最佳实践
+- 应在关键节点、复杂逻辑处使用 `OSLog` 预留日志以方便调试
+
+## 本地化规范
+
+遵循代码优先原则，所使用的 key 由构建工具自动提取，严禁手动添加。
+
+所有的 key 统一使用点分隔结构、使用下划线分隔单词，并遵循如下规则：
+
+- UI 文本：约定为 `module.type.name` 的结构
+- 错误消息：约定为 `error.name.type` 的结构，且须声明 `tableName` 以将其提取到 ErrorMessage.xcstrings 中
+
+开发阶段仅需完成简体中文文案，其他语言后续补充。
 
 ## 目录结构
 
 ```
 MiraPDF/
-├── Core/          # 应用核心
-├── Features/      # 功能模块
-├── Shared/        # 共享组件
+├── Core/            # 应用核心
+├── Features/        # 功能模块
+├── Shared/          # 共享组件
 │   └── Extensions/  # 扩展
-└── Localization/  # 本地化资源
+└── Localization/    # 本地化资源
 ```
 
-## 代码规范
+## AI 行为约束
 
-- **最大行长度**: 120 字符
-- **缩进**: 2 空格
-- **日志**: 使用 `OSLog`
-- **本地化**: 所有 UI 字符串使用本地化键
-- **文档语言**: 代码注释、提交信息使用中文
-
-## AI 行为限制
-
-1. 仅编辑文本文件（如 `.swift`、`.md` 等）。对于 `.plist`、`.xcodeproj` 等结构化文件，仅告知用户在 Xcode 中的修改方式，不直接编辑
-
-## 功能规划
-
-详见 `README.md`：
-1. **基础阅读能力**: 单页/双页/连续滚动、缩略图、目录解析、全局搜索
-2. **阅读标注**: 高亮、批注、下划线、形状工具、便签
-3. **AI 助手**: 摘要生成、语义搜索、问答
-4. **功能增强**: 双语对照、OCR、PDF 分割合并
+1. 精简主义、言简意赅、直指核心、不说废话
+2. Plan 模式优先，在明确收到指令前不要生成代码写入操作
+3. 避免直接修改 `plist`、`xcstrings` 等结构化文件，应仅告知在开发工具中的修改方法
+4. 在用户要求生成提交信息时仅需按照提交规范生成提交信息，严禁执行 `git commit` 指令
 
 ## 提交规范
 
-使用 Angular Commit Message Convention，但请保持简单。
+提交信息应严格遵循 Angular Commit Message Convention 并尽可能保持简洁，当 description 足以说明此次提交时无需生成 body 和 footer。
 
 ```
 <type>[optional scope]: <description>
@@ -48,13 +53,3 @@ MiraPDF/
 
 [optional footer(s)]
 ```
-
-**Type 类型**：
-- `feat`: 新功能
-- `fix`: 修复 bug
-- `docs`: 文档更新
-- `style`: 代码格式调整
-- `refactor`: 重构
-- `perf`: 性能优化
-- `test`: 添加测试
-- `chore`: 构建过程或辅助工具变更
