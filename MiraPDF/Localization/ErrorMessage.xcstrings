@@ -1,0 +1,46 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "error.corrupt_file.reason" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该文件的格式不正确。"
+          }
+        }
+      }
+    },
+    "error.corrupt_file.suggestion" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该文件可能已损坏、截掉，或者格式与期望的不同。"
+          }
+        }
+      }
+    },
+    "error.empty_file.reason" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "因为它是空的。"
+          }
+        }
+      }
+    },
+    "error.unknown.reason" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未知错误。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}
