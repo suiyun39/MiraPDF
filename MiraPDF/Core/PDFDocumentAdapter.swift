@@ -1,4 +1,5 @@
 import OSLog
+import PDFKit
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -32,8 +33,12 @@ struct PDFDocumentAdapter: FileDocument {
 
   private let logger = Logger(category: "Core")
 
+  /// PDFKit 文档实例
+  let document: PDFDocument
+
   // 仅用于满足 DocumentGroup 类型签名，此处不应有任何逻辑
   init() {
+    self.document = PDFDocument()
   }
 
   init(configuration: ReadConfiguration) throws {
@@ -56,6 +61,15 @@ struct PDFDocumentAdapter: FileDocument {
     }
 
     logger.info("文件加载成功，文件大小 \(data.count) 字节")
+
+    guard let document = PDFDocument(data: data) else {
+      logger.error("文件解析失败，无法构建 PDFDocument 实例")
+      throw PDFDocumentAdapterError.corruptFile
+    }
+    self.document = document
+
+    logger.info("文件解析完成，PDF V\(document.majorVersion).\(document.minorVersion)")
+    logger.info("\(document.isEncrypted ? "已加密文档" : "未加密文档")，共 \(document.pageCount) 页")
   }
 
   func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
