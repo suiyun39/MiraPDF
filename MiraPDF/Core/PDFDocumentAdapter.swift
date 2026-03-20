@@ -7,12 +7,14 @@ enum PDFDocumentAdapterError: LocalizedError {
   case unknown
   case emptyFile
   case corruptFile
+  case serializationFailed
 
   var failureReason: String? {
     switch self {
     case .unknown: String(localized: "error.unknown.reason", table: "ErrorMessage")
     case .emptyFile: String(localized: "error.empty_file.reason", table: "ErrorMessage")
     case .corruptFile: String(localized: "error.corrupt_file.reason", table: "ErrorMessage")
+    case .serializationFailed: String(localized: "error.serialization_failed.reason", table: "ErrorMessage")
     }
   }
 
@@ -21,6 +23,7 @@ enum PDFDocumentAdapterError: LocalizedError {
     case .unknown: nil
     case .emptyFile: nil
     case .corruptFile: String(localized: "error.corrupt_file.suggestion", table: "ErrorMessage")
+    case .serializationFailed: nil
     }
   }
 }
@@ -73,7 +76,12 @@ struct PDFDocumentAdapter: FileDocument {
   }
 
   func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    // todo: 实现文件保存逻辑
-    throw CocoaError(.featureUnsupported)
+    guard let data = document.dataRepresentation() else {
+      logger.error("PDF 数据序列化失败")
+      throw PDFDocumentAdapterError.serializationFailed
+    }
+    logger.info("数据序列化完成，数据大小 \(data.count) 字节")
+
+    return FileWrapper(regularFileWithContents: data)
   }
 }
