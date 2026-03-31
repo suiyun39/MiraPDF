@@ -11,7 +11,10 @@ struct MiraPDFApp: App {
 
   var body: some Scene {
     DocumentGroup(newDocument: PDFDocumentAdapter()) { configuration in
+      let store = WindowStore(document: configuration.document.document)
+
       MainWindowView()
+        .environment(store)
     }
     .windowToolbarLabelStyle(fixed: .iconOnly)
 
