@@ -19,7 +19,7 @@ struct SidebarToolbar: ToolbarContent {
     // 侧边栏模式切换按钮
     ToolbarItem(placement: .primaryAction) {
       Menu {
-        Picker("", selection: $sidebarMode) {
+        Picker("", selection: $sidebarMode.animation()) {
           ForEach(modes, id: \.self) { mode in
             Text(mode.displayName).tag(mode)
           }
