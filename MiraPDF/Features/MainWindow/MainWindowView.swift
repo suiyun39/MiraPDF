@@ -1,33 +1,33 @@
 import SwiftUI
 
 struct MainWindowView: View {
-  @State
-  private var vm = MainWindowViewModel()
+  @Environment(WindowStore.self)
+  private var store
 
-  // 由侧边栏模式计算布局模式
-  // 用户通过拖动等方式也可以打开关闭侧边栏，因此需要反向同步以防止状态不一致
+  // 由侧边栏模式计算窗口布局模式
+  // 用户通过拖动等方式也可以打开关闭侧边栏，因此需要反向同步
   private var columnVisibility: Binding<NavigationSplitViewVisibility> {
     Binding(
       get: {
-        return vm.sidebarMode == .none ? .detailOnly : .all
+        return store.sidebarMode == .none ? .detailOnly : .all
       },
-      set: { value in
-        if value == .detailOnly && vm.sidebarMode != .none {
-          vm.sidebarMode = .none
+      set: { next in
+        if next == .detailOnly && store.sidebarMode != .none {
+          store.sidebarMode = .none
           return
         }
-        if value == .all && vm.sidebarMode == .none {
-          vm.sidebarMode = .outline
+        if next == .all && store.sidebarMode == .none {
+          store.sidebarMode = .outline
           return
         }
-      },
+      }
     )
   }
 
-  @State
-  private var assistantPresented = false
-
   var body: some View {
+    // 必要的写法，ref: https://developer.apple.com/documentation/swiftui/bindable
+    @Bindable var store = store
+
     NavigationSplitView(
       columnVisibility: columnVisibility,
       sidebar: {
@@ -35,38 +35,15 @@ struct MainWindowView: View {
         Text(verbatim: "sidebar")
           .toolbar(removing: .sidebarToggle)
           .toolbar {
-            SidebarToolbar(sidebarMode: $vm.sidebarMode)
+            SidebarToolbar(sidebarMode: $store.sidebarMode)
           }
-
-          // min 应始终不小于 200，否则会导致侧边栏折叠时切换按钮消失
-          // 必须在 toolbar 之后配置
+          // 必须在 toolbar 之后配置。min 小于 200 会导致侧边栏折叠时切换按钮消失
           .navigationSplitViewColumnWidth(min: 200, ideal: 260, max: 320)
       },
       detail: {
         // todo: 临时占位，后续换为 pdf 阅读器
-        ScrollView {
-          Text(vm.sidebarMode.displayName).animation(nil)
-          Rectangle().fill(.gray).frame(height: 2000).padding()
-        }
-        .searchable(text: $vm.searchKeyword)
-        .toolbar {
-          MainWindowToolbar(assistantPresented: $assistantPresented)
-        }
-
-        // 点击主窗口时使搜索框失去焦点，暂不确定这种做法是否存在副作用
-        .onTapGesture {
-          DispatchQueue.main.async {
-            NSApplication.shared.keyWindow?.makeFirstResponder(nil)
-          }
-        }
+        EmptyView()
       },
     )
-    .animation(.snappy, value: columnVisibility.wrappedValue)
-
-    // 右侧辅助面板，初步设计为承载 AI 助手
-    .inspector(isPresented: $assistantPresented) {
-      Text(verbatim: "AI Assistant Panel")
-        .inspectorColumnWidth(min: 340, ideal: 420, max: 560)
-    }
   }
 }
