@@ -17,10 +17,6 @@ struct MiraPDFApp: App {
         .environment(store)
     }
     .windowToolbarLabelStyle(fixed: .iconOnly)
-
-    Settings {
-      EmptyView()
-    }
     .commands {
       AppCommands()
     }
